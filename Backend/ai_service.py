@@ -7,46 +7,28 @@ from sklearn.metrics.pairwise import cosine_similarity
 # GLOBALS to be lazy-loaded
 model = None
 QUESTIONS_DB = None
-EMBEDDING_CACHE = {}
-_is_initialized = False
 
-def initialize_ai():
-    global model, QUESTIONS_DB, EMBEDDING_CACHE, _is_initialized
-    if _is_initialized:
+def load_database():
+    global QUESTIONS_DB
+    if QUESTIONS_DB is not None:
         return
-        
+    dataset_path = os.path.join(os.path.dirname(__file__), 'data', 'questions.json')
+    with open(dataset_path, 'r', encoding='utf-8') as f:
+        QUESTIONS_DB = json.load(f)
+
+def load_ai_model():
+    global model
+    if model is not None:
+        return
     print("Loading local AI model (this may take 10-20 seconds on first run)...")
     model = SentenceTransformer('all-MiniLM-L6-v2')  # ~80MB, very fast
     print("Local AI model loaded successfully!")
-
-    # Load the questions dataset
-    DATASET_PATH = os.path.join(os.path.dirname(__file__), 'data', 'questions.json')
-    with open(DATASET_PATH, 'r', encoding='utf-8') as f:
-        QUESTIONS_DB = json.load(f)
-
-    # PRE-CACHE EMBEDDINGS (Performance Optimization)
-    print("Optimizing system: Pre-calculating answer embeddings...")
-    for role, questions in QUESTIONS_DB.items():
-        for q in questions:
-            q_text = q["question"]
-            ideal_text = q["ideal_answer"]
-            embedding = model.encode([ideal_text])
-            EMBEDDING_CACHE[q_text.lower()] = {
-                "embedding": embedding,
-                "ideal_answer": ideal_text,
-                "keywords": q["keywords"],
-                "role": role
-            }
-    print(f"System Optimized: {len(EMBEDDING_CACHE)} questions cached.")
-
-
-
 def generate_interview_questions(field, count):
     """
     Randomly selects questions from the dataset for the given role.
     """
     try:
-        initialize_ai()
+        load_database()
         # Normalize field name
         role = field.strip()
         
@@ -76,29 +58,38 @@ def analyze_interview_answer(question, answer):
     Context-aware feedback for General Interview vs Technical questions.
     """
     try:
-        initialize_ai()
-        # Check cache for question data
+        load_database()
         q_key = question.lower()
-        if q_key not in EMBEDDING_CACHE:
-            # Question not in dataset, use generic scoring
+        
+        # Find the question in the DB
+        q_data = None
+        q_role = None
+        for role, questions_list in QUESTIONS_DB.items():
+            for q in questions_list:
+                if q["question"].lower() == q_key:
+                    q_data = q
+                    q_role = role
+                    break
+            if q_data: break
+            
+        if not q_data:
             return {
                 "rating": 5,
                 "feedback": "Your answer was recorded. This question is not in the standard dataset, so detailed feedback is unavailable.",
                 "improvement": "Try to be more specific and provide examples.",
                 "correctness": "Unknown"
             }
-        
-        q_data = EMBEDDING_CACHE[q_key]
-        ideal_embedding = q_data["embedding"]
+            
+        ideal_text = q_data["ideal_answer"]
         keywords = q_data["keywords"]
-        question_role = q_data["role"]
+        is_general = (q_role == "General Interview")
         
-        # Determine if this is a General Interview question
-        is_general = (question_role == "General Interview")
+        # Load AI only when we actually need to analyze
+        load_ai_model()
         
-        # 1. Semantic Similarity
+        # 1. Semantic Similarity (Calculated on the fly to save RAM and Startup Time!)
+        ideal_embedding = model.encode([ideal_text])
         answer_embedding = model.encode([answer])
-        # Use cached ideal_embedding
         similarity = cosine_similarity(answer_embedding, ideal_embedding)[0][0]
         
         # --- GIBBERISH DETECTION (Trained System v3) ---
