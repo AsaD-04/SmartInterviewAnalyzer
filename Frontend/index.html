@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Interview Analyzer - AI-Powered Interview Practice</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-brain"></i> Smart Interview Analyzer</h1>
+            <p>Elevate your interview skills with AI-powered feedback.</p>
+        </header>
+
+        <!-- Configuration Section -->
+        <section id="config-section" class="card fade-in">
+            <h2>Setup Your Session</h2>
+            <div id="server-status" class="hidden"
+                style="margin-bottom:15px; padding:10px; background:rgba(255,0,0,0.2); border-radius:5px; text-align:center;">
+                Server Check...
+            </div>
+            <div class="form-group">
+                <label>Select Your Role</label>
+                <div class="role-grid" id="role-grid">
+                    <div class="role-card" data-role="Python Developer">
+                        <i class="fab fa-python"></i>
+                        <h3>Python Developer</h3>
+                    </div>
+                    <div class="role-card" data-role="Data Scientist">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Data Scientist</h3>
+                    </div>
+                    <div class="role-card" data-role="Data Engineer">
+                        <i class="fas fa-database"></i>
+                        <h3>Data Engineer</h3>
+                    </div>
+                    <div class="role-card" data-role="General Interview">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>General Interview</h3>
+                        <p>Behavioral & common questions</p>
+                    </div>
+                    <div class="role-card coming-soon">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>More Coming Soon</h3>
+                        <p>New fields being added!</p>
+                    </div>
+                    <!-- Hidden input to store selection -->
+                    <input type="hidden" id="field" value="General Interview">
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="count">Number of Questions</label>
+                    <select id="count">
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                        <option value="15">15 Questions</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Response Mode</label>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" data-mode="text" onclick="setMode('text')"><i
+                                class="fas fa-keyboard"></i> Text</button>
+                        <button class="mode-btn" data-mode="audio" onclick="setMode('audio')"><i
+                                class="fas fa-microphone"></i> Audio</button>
+                    </div>
+                </div>
+                <button id="start-btn" onclick="showInstructions()">Continue to Guidelines</button>
+        </section>
+
+        <!-- Instructions Section (Hidden by default) -->
+        <section id="instructions-section" class="card hidden fade-in">
+            <h2>Interview Guidelines</h2>
+            <div class="instructions-box">
+                <div class="instruction-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Grading System</h4>
+                        <p>Our AI grades your answers based on <strong>Semantic Similarity</strong> (covering the core
+                            concepts) and <strong>Keyword Matching</strong> (using correct technical terminology).</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>Technical vs. General</h4>
+                        <p><strong>Technical</strong> roles are graded strictly on accuracy and keywords.
+                            <strong>General</strong>
+                            questions focus more on your structure and communication style.
+                        </p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <i class="fas fa-bullseye"></i>
+                    <div>
+                        <h4>Tips for Success</h4>
+                        <p>Be specific, use examples, and try to include key industry terms. Take your time—quality
+                            matters more than speed!</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button onclick="hideInstructions()" style="background: rgba(255,255,255,0.1); flex: 1;">Back</button>
+                <button onclick="startInterview()" style="flex: 2;">Start Interview Now</button>
+            </div>
+        </section>
+
+        <!-- Interview Section (Hidden by default) -->
+        <section id="interview-section" class="card hidden fade-in">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="question-box">
+                <span class="q-number" id="q-number">Question 1/5</span>
+                <h3 id="question-text">Loading question...</h3>
+            </div>
+
+            <div class="answer-area">
+                <!-- Text Input Mode -->
+                <div id="text-input-container">
+                    <textarea id="answer-text" placeholder="Type your answer here..."></textarea>
+                </div>
+
+                <!-- Audio Input Mode -->
+                <div id="audio-input-container" class="hidden">
+                    <div class="audio-controls">
+                        <button id="record-btn" class="btn-premium btn-record" onclick="toggleRecording()">
+                            <i class="fas fa-microphone"></i> <span id="record-status">Start Recording</span>
+                        </button>
+                        <button id="clear-btn" class="btn-premium btn-clear" onclick="clearTranscript()">
+                            <i class="fas fa-trash-alt"></i> Clear
+                        </button>
+                    </div>
+                    <p id="transcript-preview" class="transcript-box">Your speech will appear here...</p>
+                </div>
+            </div>
+
+            <div class="interview-nav">
+                <button id="prev-btn" class="nav-btn secondary" onclick="previousQuestion()">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="submit-answer-btn" class="nav-btn primary" onclick="submitAnswer()">
+                    Submit Answer <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div id="loading-indicator" class="hidden"><i class="fas fa-spinner fa-spin"></i> Analyzing...</div>
+        </section>
+
+        <!-- Result Section (Hidden by default) -->
+        <section id="result-section" class="card hidden fade-in">
+            <h2>Interview Complete!</h2>
+            <div id="final-score" class="score-card">
+                <!-- Score will be injected here -->
+            </div>
+            <div id="feedback-list" class="feedback-list">
+                <!-- Detailed feedback will be injected here -->
+            </div>
+            <div class="result-actions">
+                <button onclick="startNewSession()">Start New Session</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

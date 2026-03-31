@@ -1,0 +1,66 @@
+==================================================
+SMART INTERVIEW ANALYZER - PROJECT GUIDE
+==================================================
+
+This document explains the project structure and how to customize 
+your AI-powered interview practice application.
+
+--------------------------------------------------
+1. FILE EXPLANATIONS
+--------------------------------------------------
+
+[ROOT]
+- setup_and_run.bat   : One-click script to set up environment and run the app.
+- .gitignore          : Tells Git to ignore temporary files like 'venv' and '__pycache__'.
+- PROJECT_GUIDE.txt   : This summary and help document.
+
+[BACKEND/ (Python/AI Engine)]
+- ai_service.py       : THE CORE. Performs AI analysis, scoring, and gibberish detection.
+- app.py              : THE API. Flask server that connects the Frontend to the AI service.
+- data/questions.json : THE CONTENT. Contains all questions, roles, and ideal answers.
+- requirements.txt    : Lists dependencies (Flask, sentence-transformers, etc.).
+- venv/               : Virtual environment folder containing installed libraries.
+    - scripts/ : Python executables, pip, and 'activate' scripts.
+    - lib/     : Where all your project dependencies (libraries) are stored.
+    - include/ : Header files for C/C++ packages (usually empty).
+    - share/   : Shared data files for certain packages.
+
+[FRONTEND/ (User Interface)]
+- index.html          : The layout and visual structure of the app.
+- style.css           : The "Glassmorphism" design, colors, and animations.
+- app.js              : Handles voice recording, UI state, and API communication.
+
+--------------------------------------------------
+2. HOW TO CUSTOMIZE THE AI
+--------------------------------------------------
+
+All AI and Scoring logic is located in: Backend/ai_service.py
+
+- Change AI Model (Line 9):
+    model = SentenceTransformer('all-MiniLM-L6-v2') 
+    (Change the string to use another model from HuggingFace).
+
+- Adjust Scoring Strictness (Line 107):
+    similarity_boosted = (similarity ** 0.7) * 100
+    (Lower the '0.7' to be more lenient, increase it to be stricter).
+
+- Balance Meaning vs Keywords (Line 145):
+    final_score = (similarity_score * 0.75) + (keyword_score * 0.25)
+    (Adjust the weights 0.75 and 0.25 to change the importance of keywords).
+
+[CONTENT]
+- Add/Edit Questions: 
+    Edit 'Backend/data/questions.json' to change roles or ideal answers.
+
+--------------------------------------------------
+3. HOSTING GUIDE
+--------------------------------------------------
+
+Professional Method (Dual-Hosting):
+1. BACKEND: Host on Render.com or Railway.app (Python support needed).
+2. FRONTEND: Update 'app.js' with the new backend URL, then drag & drop 
+   the 'Frontend' folder into Netlify.com.
+
+==================================================
+Your Smart Interview Analyzer is now ready! 🚀
+==================================================

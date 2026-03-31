@@ -1,0 +1,726 @@
+{
+  "Python Developer": [
+    {
+      "question": "What is the difference between list and tuple?",
+      "ideal_answer": "Lists are mutable, meaning you can change their content after creation using methods like append, remove, or direct assignment. Tuples are immutable, so once created, their elements cannot be changed. Lists use square brackets [] while tuples use parentheses (). Tuples are generally faster and use less memory than lists.",
+      "keywords": [
+        "mutable",
+        "immutable",
+        "square brackets",
+        "parentheses",
+        "memory",
+        "performance"
+      ]
+    },
+    {
+      "question": "Explain decorators in Python.",
+      "ideal_answer": "Decorators are a design pattern that allows you to modify or extend the behavior of functions or methods without changing their source code. They use the @ syntax and are essentially higher-order functions that take a function as input and return a modified version. Common use cases include logging, authentication, caching, and timing functions.",
+      "keywords": [
+        "@",
+        "higher-order",
+        "wrapper",
+        "function",
+        "modify behavior",
+        "syntax sugar"
+      ]
+    },
+    {
+      "question": "How does memory management work in Python?",
+      "ideal_answer": "Python uses automatic memory management with a private heap to store objects. It employs reference counting to track object usage and a garbage collector to handle cyclic references. When an object's reference count drops to zero, its memory is deallocated. The garbage collector periodically identifies and cleans up circular references that reference counting alone cannot handle.",
+      "keywords": [
+        "heap",
+        "reference counting",
+        "garbage collector",
+        "cyclic references",
+        "automatic",
+        "deallocation"
+      ]
+    },
+    {
+      "question": "What is a lambda function?",
+      "ideal_answer": "A lambda function is an anonymous, small, single-expression function defined using the lambda keyword. It can take any number of arguments but can only have one expression. Lambda functions are commonly used for short operations, often as arguments to higher-order functions like map, filter, and sorted. Example: lambda x: x * 2",
+      "keywords": [
+        "anonymous",
+        "single expression",
+        "lambda keyword",
+        "map",
+        "filter",
+        "inline"
+      ]
+    },
+    {
+      "question": "Explain the Global Interpreter Lock (GIL).",
+      "ideal_answer": "The GIL is a mutex that protects access to Python objects, preventing multiple threads from executing Python bytecode simultaneously. This means that in CPython, only one thread can execute Python code at a time, even on multi-core processors. While it simplifies memory management, it limits the performance of CPU-bound multi-threaded programs. For true parallelism, use multiprocessing instead of threading.",
+      "keywords": [
+        "mutex",
+        "thread",
+        "CPython",
+        "bytecode",
+        "parallelism",
+        "multiprocessing",
+        "lock"
+      ]
+    },
+    {
+      "question": "What are generators and how do they differ from lists?",
+      "ideal_answer": "Generators are functions that return an iterator using the yield keyword. Unlike lists, which store all elements in memory, generators produce values on-the-fly (lazy evaluation). This makes them much more memory-efficient when working with large datasets. You iterate over them using a loop, but once exhausted, they cannot be restarted without re-calling the function.",
+      "keywords": [
+        "yield",
+        "iterator",
+        "lazy evaluation",
+        "memory-efficient",
+        "on-the-fly",
+        "exhausted"
+      ]
+    },
+    {
+      "question": "Explain the difference between __str__ and __repr__.",
+      "ideal_answer": "__str__ is intended to provide a human-readable string representation of an object, often used for logging or printing to the end-user. __repr__ is intended to be an unambiguous representation used for debugging, and it should Ideally look like a valid Python expression that could recreate the object. If __str__ is not defined, Python falls back to __repr__.",
+      "keywords": [
+        "human-readable",
+        "unambiguous",
+        "debugging",
+        "representation",
+        "expression",
+        "fallback"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'with' statement in Python?",
+      "ideal_answer": "The 'with' statement is used for context management. It ensures that resources like file streams or network connections are properly closed or released after use, even if an error occurs. It works by calling the __enter__ and __exit__ methods of an object, providing a cleaner and safer way to handle setup and teardown tasks.",
+      "keywords": [
+        "context manager",
+        "resource",
+        "cleanup",
+        "exception",
+        "__enter__",
+        "__exit__"
+      ]
+    },
+    {
+      "question": "How do you handle exceptions in Python?",
+      "ideal_answer": "Exceptions are handled using try-except blocks. You put the code that might fail in the try block and handle specific errors in one or more except blocks. You can also use a finally block for code that must run regardless of whether an exception occurred, and an else block for code that runs only if no exception was raised.",
+      "keywords": [
+        "try",
+        "except",
+        "finally",
+        "else",
+        "raise",
+        "error handling"
+      ]
+    },
+    {
+      "question": "What are args and kwargs?",
+      "ideal_answer": "*args and **kwargs allow a function to accept a variable number of arguments. *args is used for non-keyworded variable-length arguments (passed as a tuple), while **kwargs is used for keyworded variable-length arguments (passed as a dictionary). They make functions more flexible and are often used in decorators and subclasses.",
+      "keywords": [
+        "variable arguments",
+        "tuple",
+        "dictionary",
+        "flexibility",
+        "positional",
+        "keyword"
+      ]
+    },
+    {
+      "question": "What is slicing in Python?",
+      "ideal_answer": "Slicing is a technique to extract a part of a sequence, such as a list, string, or tuple, using the [start:stop:step] syntax. It returns a new object of the same type. For example, my_list[1:4] returns elements from index 1 to 3. Slicing is efficient and widely used for data manipulation.",
+      "keywords": [
+        "index",
+        "sequence",
+        "range",
+        "step",
+        "extraction"
+      ]
+    },
+    {
+      "question": "Explain the difference between deep copy and shallow copy.",
+      "ideal_answer": "A shallow copy creates a new object but does not recursively copy the objects inside it; instead, it copies references to them. A deep copy creates a new object and recursively copies all objects found within the original. Modifying a mutable object inside a shallow copy affects the original, whereas a deep copy is completely independent.",
+      "keywords": [
+        "copy module",
+        "recursion",
+        "reference",
+        "mutable",
+        "independent"
+      ]
+    },
+    {
+      "question": "What is PEP 8?",
+      "ideal_answer": "PEP 8 is the official Style Guide for Python Code. It provides guidelines on how to format Python code to maximize readability and maintainability. Key recommendations include using 4 spaces per indentation level, limiting lines to 79 characters, and using specific naming conventions for classes, functions, and variables.",
+      "keywords": [
+        "style guide",
+        "readability",
+        "indentation",
+        "conventions",
+        "format"
+      ]
+    },
+    {
+      "question": "How does inheritance work in Python?",
+      "ideal_answer": "Inheritance allows a class (child) to inherit attributes and methods from another class (parent). Python supports single, multiple, multilevel, and hierarchical inheritance. The child class can override parent methods or use super() to call them. This promotes code reuse and creates a logical hierarchy.",
+      "keywords": [
+        "subclass",
+        "superclass",
+        "method overriding",
+        "super()",
+        "polymorphism",
+        "reuse"
+      ]
+    },
+    {
+      "question": "What are list comprehensions?",
+      "ideal_answer": "List comprehensions provide a concise way to create lists based on existing sequences. They consist of an expression followed by a for clause and optional if clauses, enclosed in square brackets. They are usually faster and more readable than using traditional for loops for simple operations.",
+      "keywords": [
+        "concise",
+        "expression",
+        "sequence",
+        "readability",
+        "functional"
+      ]
+    }
+  ],
+  "Data Scientist": [
+    {
+      "question": "What is the difference between supervised and unsupervised learning?",
+      "ideal_answer": "Supervised learning uses labeled training data where the correct output is known, and the model learns to map inputs to outputs. Examples include classification and regression. Unsupervised learning works with unlabeled data to find hidden patterns or structures, such as clustering or dimensionality reduction. The key difference is the presence or absence of labeled target variables.",
+      "keywords": [
+        "labeled",
+        "unlabeled",
+        "classification",
+        "regression",
+        "clustering",
+        "target variable",
+        "patterns"
+      ]
+    },
+    {
+      "question": "Explain overfitting and how to prevent it.",
+      "ideal_answer": "Overfitting occurs when a model learns the training data too well, including noise and outliers, resulting in poor generalization to new data. Prevention techniques include: using cross-validation, regularization (L1/L2), reducing model complexity, increasing training data, early stopping, dropout in neural networks, and ensemble methods. The goal is to balance bias and variance.",
+      "keywords": [
+        "generalization",
+        "regularization",
+        "cross-validation",
+        "bias-variance",
+        "dropout",
+        "early stopping",
+        "noise"
+      ]
+    },
+    {
+      "question": "What is a confusion matrix?",
+      "ideal_answer": "A confusion matrix is a table used to evaluate classification model performance. It shows true positives, true negatives, false positives, and false negatives. From it, you can calculate metrics like accuracy, precision, recall, F1-score, and specificity. It's especially useful for imbalanced datasets where accuracy alone can be misleading.",
+      "keywords": [
+        "true positive",
+        "false positive",
+        "precision",
+        "recall",
+        "F1-score",
+        "classification",
+        "evaluation"
+      ]
+    },
+    {
+      "question": "How do you handle missing data?",
+      "ideal_answer": "Missing data can be handled by: deletion (removing rows/columns with missing values), imputation (filling with mean, median, mode, or using algorithms like KNN or MICE), using models that handle missing values natively (like XGBoost), or creating indicator variables to flag missingness. The choice depends on the amount and pattern of missing data (MCAR, MAR, or MNAR).",
+      "keywords": [
+        "imputation",
+        "deletion",
+        "mean",
+        "median",
+        "KNN",
+        "MICE",
+        "MCAR",
+        "MAR"
+      ]
+    },
+    {
+      "question": "Explain the Central Limit Theorem.",
+      "ideal_answer": "The Central Limit Theorem states that the distribution of sample means approaches a normal distribution as the sample size increases, regardless of the population's original distribution. This is fundamental for statistical inference, allowing us to make probabilistic statements about population parameters using sample statistics. It typically requires a sample size of at least 30.",
+      "keywords": [
+        "normal distribution",
+        "sample mean",
+        "sample size",
+        "statistical inference",
+        "population",
+        "30"
+      ]
+    },
+    {
+      "question": "What is the difference between L1 and L2 regularization?",
+      "ideal_answer": "L1 regularization (Lasso) adds the absolute value of coefficients as a penalty term, which can lead to sparse models by driving some coefficients to exactly zero, thus performing feature selection. L2 regularization (Ridge) adds the squared value of coefficients, penalizing large weights but not forcing them to zero. L1 is better for feature selection, while L2 is often more stable.",
+      "keywords": [
+        "Lasso",
+        "Ridge",
+        "penalty",
+        "coefficients",
+        "sparsity",
+        "feature selection"
+      ]
+    },
+    {
+      "question": "Explain Random Forest and how it works.",
+      "ideal_answer": "Random Forest is an ensemble learning method that builds multiple decision trees during training and merges them to get a more accurate and stable prediction. It uses bagging (bootstrap aggregating) and random feature selection for each tree split. For classification, it takes the majority vote; for regression, it averages the results. This reduces variance and prevents overfitting.",
+      "keywords": [
+        "ensemble",
+        "decision tree",
+        "bagging",
+        "bootstrap",
+        "voting",
+        "averaging"
+      ]
+    },
+    {
+      "question": "What is Gradient Descent?",
+      "ideal_answer": "Gradient Descent is an optimization algorithm used to minimize a cost function by iteratively adjusting model parameters in the direction of the steepest descent. It calculates the gradient (partial derivative) of the cost function with respect to weights and updates the weights using a learning rate. Variants include Batch, Stochastic (SGD), and Mini-batch gradient descent.",
+      "keywords": [
+        "optimization",
+        "cost function",
+        "gradient",
+        "weights",
+        "learning rate",
+        "minimize"
+      ]
+    },
+    {
+      "question": "What is Feature Engineering?",
+      "ideal_answer": "Feature engineering is the process of using domain knowledge to extract or create new features from raw data that help machine learning algorithms perform better. Common techniques include one-hot encoding for categorical data, scaling/normalization, creating interaction terms, handling outliers, and PCA for dimensionality reduction.",
+      "keywords": [
+        "raw data",
+        "domain knowledge",
+        "one-hot encoding",
+        "scaling",
+        "PCA",
+        "dimensionality"
+      ]
+    },
+    {
+      "question": "Explain P-value in statistics.",
+      "ideal_answer": "A p-value is the probability of obtaining test results at least as extreme as the results actually observed, assuming that the null hypothesis is true. A small p-value (typically less than 0.05) indicates strong evidence against the null hypothesis, leading to its rejection. It measures the statistical significance of an effect but not its magnitude.",
+      "keywords": [
+        "probability",
+        "null hypothesis",
+        "significance",
+        "alpha",
+        "inference"
+      ]
+    },
+    {
+      "question": "What is K-means clustering?",
+      "ideal_answer": "K-means is an unsupervised learning algorithm that partitions data into K clusters. It starts by randomly picking K centroids, then assigns each data point to the nearest centroid. Centroids are updated by calculating the mean of points in each cluster, and the process repeats until convergence. It's used for segmentation, but requires the number of clusters to be specified in advance.",
+      "keywords": [
+        "clustering",
+        "unsupervised",
+        "centroids",
+        "K",
+        "distance",
+        "convergence"
+      ]
+    },
+    {
+      "question": "Explain Data Normalization vs Standardization.",
+      "ideal_answer": "Normalization (Min-Max scaling) rescales data to a fixed range, usually [0, 1]. Standardization (Z-score scaling) centers the data at 0 with a standard deviation of 1. Normalization is sensitive to outliers and used when the distribution is unknown. Standardization is more robust and preferred for algorithms that assume a Gaussian distribution.",
+      "keywords": [
+        "min-max",
+        "z-score",
+        "scaling",
+        "outliers",
+        "distribution",
+        "Gaussian"
+      ]
+    },
+    {
+      "question": "What is Cross-Validation?",
+      "ideal_answer": "Cross-validation is a technique used to evaluate the performance of a machine learning model by splitting data into multiple subsets. Common methods include K-fold cross-validation, where data is split into K folds, and the model is trained K times, each time using a different fold for testing. This provides a more robust estimate of model performance and helps detect overfitting.",
+      "keywords": [
+        "K-fold",
+        "evaluation",
+        "splitting",
+        "robust",
+        "performance",
+        "validation"
+      ]
+    },
+    {
+      "question": "Explain the difference between bagging and boosting.",
+      "ideal_answer": "Bagging (Bootstrap Aggregating) trains multiple models independently in parallel and aggregates their results (e.g., Random Forest). Boosting trains models sequentially, where each new model focuses on correcting the errors of the previous ones (e.g., XGBoost, AdaBoost). Bagging reduces variance, while boosting primarily reduces bias.",
+      "keywords": [
+        "parallel",
+        "sequential",
+        "bias",
+        "variance",
+        "ensemble",
+        "XGBoost"
+      ]
+    },
+    {
+      "question": "What is dimensionality reduction?",
+      "ideal_answer": "Dimensionality reduction is the process of reducing the number of input variables in a dataset. Techniques like Principal Component Analysis (PCA) or t-SNE transform data into a lower-dimensional space while preserving as much variance or structure as possible. It helps visualize high-dimensional data, reduces computation time, and prevents the curse of dimensionality.",
+      "keywords": [
+        "PCA",
+        "t-SNE",
+        "variance",
+        "features",
+        "compression",
+        "visualization"
+      ]
+    }
+  ],
+  "Data Engineer": [
+    {
+      "question": "Explain ETL vs ELT.",
+      "ideal_answer": "ETL (Extract, Transform, Load) transforms data before loading it into the destination, typically used with traditional data warehouses. ELT (Extract, Load, Transform) loads raw data first and transforms it within the destination system, leveraging modern cloud data warehouses' processing power. ELT is more flexible, allows for faster initial loading, and is better suited for big data and cloud environments.",
+      "keywords": [
+        "extract",
+        "transform",
+        "load",
+        "data warehouse",
+        "cloud",
+        "processing",
+        "raw data"
+      ]
+    },
+    {
+      "question": "What is a data warehouse?",
+      "ideal_answer": "A data warehouse is a centralized repository that stores integrated data from multiple sources, optimized for analysis and reporting rather than transaction processing. It uses a schema like star or snowflake, supports OLAP operations, and maintains historical data. Examples include Snowflake, Redshift, and BigQuery. It differs from databases by being read-optimized and denormalized.",
+      "keywords": [
+        "centralized",
+        "OLAP",
+        "star schema",
+        "snowflake schema",
+        "analytical",
+        "historical",
+        "denormalized"
+      ]
+    },
+    {
+      "question": "How do you optimize a slow SQL query?",
+      "ideal_answer": "Optimization techniques include: adding appropriate indexes, analyzing query execution plans, avoiding SELECT *, using JOINs instead of subqueries when possible, partitioning large tables, using EXPLAIN to identify bottlenecks, limiting result sets, avoiding functions on indexed columns, and ensuring statistics are up to date. Consider denormalization for read-heavy workloads.",
+      "keywords": [
+        "index",
+        "execution plan",
+        "EXPLAIN",
+        "JOIN",
+        "partition",
+        "denormalization",
+        "statistics"
+      ]
+    },
+    {
+      "question": "Explain the CAP theorem.",
+      "ideal_answer": "The CAP theorem states that a distributed database can only guarantee two out of three properties: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (system continues despite network failures). In practice, partition tolerance is necessary, so you choose between CP (consistent but may be unavailable) or AP (available but may be inconsistent).",
+      "keywords": [
+        "consistency",
+        "availability",
+        "partition tolerance",
+        "distributed",
+        "CP",
+        "AP",
+        "network"
+      ]
+    },
+    {
+      "question": "What is partitioning in Spark?",
+      "ideal_answer": "Partitioning in Spark divides data into smaller chunks distributed across cluster nodes for parallel processing. It affects performance significantly. Types include hash partitioning and range partitioning. Good partitioning minimizes data shuffling during operations like joins and groupBy. You can control it using repartition() or coalesce(). The number of partitions should balance parallelism with overhead.",
+      "keywords": [
+        "distributed",
+        "parallel",
+        "shuffle",
+        "repartition",
+        "coalesce",
+        "cluster",
+        "performance"
+      ]
+    },
+    {
+      "question": "What is Hadoop and its main components?",
+      "ideal_answer": "Hadoop is a framework for distributed storage and processing of large datasets across clusters of computers. Its main components are HDFS (Hadoop Distributed File System) for storage, MapReduce for processing, and YARN (Yet Another Resource Negotiator) for resource management. It's designed to handle hardware failures and provides high throughput access to data.",
+      "keywords": [
+        "HDFS",
+        "MapReduce",
+        "YARN",
+        "distributed",
+        "storage",
+        "processing",
+        "cluster"
+      ]
+    },
+    {
+      "question": "Explain the differences between SQL and NoSQL databases.",
+      "ideal_answer": "SQL databases are relational, use structured schemas, and are usually vertically scalable. They prioritize ACID compliance. NoSQL databases are non-relational, have flexible schemas (document, key-value, graph), and are designed for horizontal scaling across clusters. SQL is better for complex queries and consistency, while NoSQL is better for rapid development and handling unstructured big data.",
+      "keywords": [
+        "relational",
+        "ACID",
+        "schema",
+        "horizontal scaling",
+        "unstructured",
+        "flexible"
+      ]
+    },
+    {
+      "question": "What is data partitioning vs data sharding?",
+      "ideal_answer": "Partitioning divides data within a single database system to improve performance or manageability (e.g., by date). Sharding is a form of horizontal partitioning that distributes data across multiple independent database instances or servers. Sharding is used to scale out the system to handle massive amounts of data and high traffic that a single server cannot manage.",
+      "keywords": [
+        "horizontal",
+        "scaling",
+        "distribute",
+        "split",
+        "single database",
+        "multiple instances"
+      ]
+    },
+    {
+      "question": "Explain data lake vs data warehouse.",
+      "ideal_answer": "A data lake stores raw, unprocessed data in its native format (structured or unstructured) for future use. A data warehouse stores processed, structured data optimized for specific analytical tasks. Data lakes use 'schema-on-read', while warehouses use 'schema-on-write'. Lakes are better for data exploration and big data, while warehouses are better for reporting and business intelligence.",
+      "keywords": [
+        "raw",
+        "processed",
+        "schema-on-read",
+        "schema-on-write",
+        "exploration",
+        "reporting"
+      ]
+    },
+    {
+      "question": "What is Apache Kafka used for?",
+      "ideal_answer": "Apache Kafka is a distributed streaming platform used for building real-time data pipelines and streaming applications. It acts as a highly scalable, fault-tolerant message queue where producers publish messages to topics and consumers subscribe to them. It's commonly used for log aggregation, real-time analytics, and decoupling microservices.",
+      "keywords": [
+        "streaming",
+        "message queue",
+        "producer",
+        "consumer",
+        "real-time",
+        "pub-sub"
+      ]
+    },
+    {
+      "question": "What is the star schema vs snowflake schema?",
+      "ideal_answer": "Star schema consists of a central fact table joined to flat dimension tables, making it simple and fast for queries. Snowflake schema normalizes dimension tables into multiple related tables, reducing redundancy but making queries more complex with more joins. Star schema is usually preferred for performance in OLAP systems.",
+      "keywords": [
+        "fact table",
+        "dimension",
+        "normalized",
+        "denormalized",
+        "joins",
+        "OLAP"
+      ]
+    },
+    {
+      "question": "What is denormalization and why is it used?",
+      "ideal_answer": "Denormalization is the process of adding redundant data to a database to improve read performance. It reduces the number of joins needed to retrieve data. While it increases storage space and can make updates more complex, it's widely used in data warehousing and analytical systems where read speed is critical for reports and dashboards.",
+      "keywords": [
+        "read performance",
+        "redundancy",
+        "joins",
+        "analytical",
+        "OLAP",
+        "bottleneck"
+      ]
+    },
+    {
+      "question": "Explain the role of Airflow in data engineering.",
+      "ideal_answer": "Apache Airflow is a platform used to programmatically author, schedule, and monitor workflows. It uses Directed Acyclic Graphs (DAGs) to define tasks and their dependencies. It's widely used to orchestrate complex data pipelines, allowing for automatic retries, logging, and a web interface to track the status of data jobs.",
+      "keywords": [
+        "orchestrator",
+        "DAG",
+        "workflow",
+        "scheduling",
+        "pipeline",
+        "automation"
+      ]
+    },
+    {
+      "question": "What is a CDC (Change Data Capture)?",
+      "ideal_answer": "Change Data Capture (CDC) is a process that identifies and captures changes made to data in a source database so that these changes can be applied to a target system in real-time. It's used for data synchronization, building real-time data warehouses, and feeding streaming platforms without putting heavy load on the source database.",
+      "keywords": [
+        "synchronization",
+        "real-time",
+        "delta",
+        "source",
+        "target",
+        "capture"
+      ]
+    },
+    {
+      "question": "What are the benefits of Parquet file format?",
+      "ideal_answer": "Apache Parquet is a columnar storage file format optimized for big data processing. It provides efficient data compression and encoding schemes, offering significant performance improvements for analytical queries. Being columnar, it allows for 'predicate pushdown' and 'column projection', meaning only the required data is read from disk, saving I/O.",
+      "keywords": [
+        "columnar",
+        "compression",
+        "performance",
+        "I/O",
+        "big data",
+        "schema"
+      ]
+    }
+  ],
+  "General Interview": [
+    {
+      "question": "Tell me about yourself.",
+      "ideal_answer": "I'm a software engineer with 3 years of experience in full-stack development. I've worked on projects using React and Node.js, building scalable web applications. I'm passionate about clean code and user experience. I'm looking for a role where I can continue growing my skills and contribute to impactful projects.",
+      "keywords": [
+        "experience",
+        "skills",
+        "current role",
+        "career goals",
+        "relevant"
+      ]
+    },
+    {
+      "question": "What are your strengths?",
+      "ideal_answer": "My key strengths are problem-solving and teamwork. For example, I led a project that improved our API performance by 40% through caching strategies. I also work well with cross-functional teams, which helped us deliver our last product ahead of schedule.",
+      "keywords": [
+        "specific examples",
+        "achievements",
+        "technical skills",
+        "soft skills",
+        "outcomes"
+      ]
+    },
+    {
+      "question": "Describe a challenge you faced.",
+      "ideal_answer": "In my last project, we faced a critical performance issue two weeks before launch. I analyzed the bottleneck, implemented database indexing and query optimization, and reduced load time by 60%. This experience taught me the importance of proactive monitoring and performance testing.",
+      "keywords": [
+        "STAR",
+        "situation",
+        "action",
+        "result",
+        "problem-solving",
+        "learned"
+      ]
+    },
+    {
+      "question": "Why do you want this job?",
+      "ideal_answer": "I'm excited about this role because it aligns with my passion for building scalable systems. I've researched your company's tech stack and mission, and I'm impressed by your focus on innovation. This position would let me leverage my backend expertise while learning from a talented team.",
+      "keywords": [
+        "research",
+        "company culture",
+        "career goals",
+        "enthusiasm",
+        "alignment"
+      ]
+    },
+    {
+      "question": "Where do you see yourself in 5 years?",
+      "ideal_answer": "In 5 years, I see myself as a senior engineer or tech lead, mentoring junior developers and architecting complex systems. I want to deepen my expertise in distributed systems and contribute to open-source projects. I'm looking for a company where I can grow into leadership while staying hands-on with technology.",
+      "keywords": [
+        "growth",
+        "skills development",
+        "career progression",
+        "ambition",
+        "contribution"
+      ]
+    },
+    {
+      "question": "How do you handle conflict in a team?",
+      "ideal_answer": "I handle conflict by remaining calm and focusing on the facts. I listen to all perspectives to understand the root cause of the disagreement. Then, I try to find a middle ground or a solution that prioritizes the project's success. Open communication and mutual respect are key to resolving issues effectively.",
+      "keywords": [
+        "communication",
+        "listening",
+        "collaboration",
+        "conflict resolution",
+        "neutral"
+      ]
+    },
+    {
+      "question": "What is your greatest weakness?",
+      "ideal_answer": "I sometimes struggle with perfectionism, which can make me spend too much time on minor details. To manage this, I've started setting strict time limits for tasks and focusing on the most critical features first. This helps me maintain high quality while ensuring I meet deadlines.",
+      "keywords": [
+        "self-awareness",
+        "improvement",
+        "perfectionism",
+        "time management",
+        "learning"
+      ]
+    },
+    {
+      "question": "How do you prioritize your work?",
+      "ideal_answer": "I prioritize work using the Eisenhower Matrix, categorizing tasks by urgency and importance. I start my day by tackling the most critical items and use project management tools to track deadlines. If I have too much on my plate, I communicate with my manager to realign expectations and focus on high-impact work.",
+      "keywords": [
+        "organization",
+        "deadlines",
+        "impact",
+        "matrix",
+        "communication",
+        "tools"
+      ]
+    },
+    {
+      "question": "Describe a time you failed.",
+      "ideal_answer": "I once underestimated the time needed for a feature migration, which caused a two-day delay. I took full responsibility, worked extra hours to catch up, and communicated the delay to stakeholders immediately. Since then, I've improved my estimation process by breaking tasks into smaller, more manageable pieces.",
+      "keywords": [
+        "accountability",
+        "learning",
+        "estimation",
+        "stakeholders",
+        "improvement"
+      ]
+    },
+    {
+      "question": "Why should we hire you?",
+      "ideal_answer": "You should hire me because I have the technical skills needed for the role and a proven track record of delivering results. I'm a fast learner who can hit the ground running, and I'm passionate about your company's mission. I'm not just looking for a job, but a place where I can make a meaningful contribution.",
+      "keywords": [
+        "value",
+        "results",
+        "skills",
+        "passion",
+        "contribution",
+        "fit"
+      ]
+    },
+    {
+      "question": "How do you stay updated with technology?",
+      "ideal_answer": "I stay updated by reading technical blogs like Medium and Hacker News, attending webinars, and working on side projects. I also enjoy taking online courses on platforms like Coursera. Recently, I've been exploring AI-driven development tools to improve my coding efficiency.",
+      "keywords": [
+        "learning",
+        "blogs",
+        "courses",
+        "side projects",
+        "curiosity",
+        "technology"
+      ]
+    },
+    {
+      "question": "How do you handle tight deadlines?",
+      "ideal_answer": "I handle tight deadlines by breaking the work into small tasks and focusing on the MVP (Minimum Viable Product). I minimize distractions, stay organized, and communicate frequently with my team. If a deadline is unrealistic, I raise the concern early to discuss potential scope adjustments.",
+      "keywords": [
+        "MVP",
+        "organization",
+        "focus",
+        "early communication",
+        "priority"
+      ]
+    },
+    {
+      "question": "What is your preferred work style?",
+      "ideal_answer": "I enjoy a collaborative environment where I can brainstorm ideas with teammates. However, I also value periods of deep focus to get technical tasks done. I'm comfortable working in agile teams and appreciate clear communication and regular feedback to ensure we're on the right track.",
+      "keywords": [
+        "collaboration",
+        "deep focus",
+        "agile",
+        "communication",
+        "flexibility"
+      ]
+    },
+    {
+      "question": "Tell me about a time you worked on a team.",
+      "ideal_answer": "In my previous role, I worked on a team of five to rebuild a customer portal. I was responsible for the backend API. We had regular stand-ups and code reviews, which helped us catch bugs early and share knowledge. The project was a success and improved customer satisfaction scores by 20%.",
+      "keywords": [
+        "teamwork",
+        "collaboration",
+        "code review",
+        "stand-ups",
+        "outcome"
+      ]
+    },
+    {
+      "question": "What motivates you?",
+      "ideal_answer": "I'm motivated by solving complex problems and seeing my work have a real-world impact. I also enjoy the continuous learning that comes with technology. Being part of a team that builds innovative products and seeing users benefit from them is incredibly rewarding.",
+      "keywords": [
+        "problem-solving",
+        "impact",
+        "learning",
+        "innovation",
+        "fulfillment"
+      ]
+    }
+  ]
+}
