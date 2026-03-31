@@ -1,6 +1,15 @@
 import json
 import os
 import random
+# ----- MEMORY OPTIMIZATIONS FOR RENDER FREE TIER -----
+# These must run before PyTorch imports to prevent memory spikes
+os.environ['OMP_NUM_THREADS'] = '1'
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+os.environ['MKL_NUM_THREADS'] = '1'
+os.environ['VECLIB_MAXIMUM_THREADS'] = '1'
+os.environ['NUMEXPR_NUM_THREADS'] = '1'
+# -----------------------------------------------------
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
