@@ -4,33 +4,41 @@ import random
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load the local AI model (runs on your computer, no API needed)
-print("Loading local AI model (this may take 10-20 seconds on first run)...")
-model = SentenceTransformer('all-MiniLM-L6-v2')  # ~80MB, very fast
-print("Local AI model loaded successfully!")
-
-# Load the questions dataset
-DATASET_PATH = os.path.join(os.path.dirname(__file__), 'data', 'questions.json')
-with open(DATASET_PATH, 'r', encoding='utf-8') as f:
-    QUESTIONS_DB = json.load(f)
-
-# PRE-CACHE EMBEDDINGS (Performance Optimization)
-# We pre-calculate all ideal answer embeddings at startup so each 
-# response analysis is nearly instantaneous.
-print("Optimizing system: Pre-calculating answer embeddings...")
+# GLOBALS to be lazy-loaded
+model = None
+QUESTIONS_DB = None
 EMBEDDING_CACHE = {}
-for role, questions in QUESTIONS_DB.items():
-    for q in questions:
-        q_text = q["question"]
-        ideal_text = q["ideal_answer"]
-        embedding = model.encode([ideal_text])
-        EMBEDDING_CACHE[q_text.lower()] = {
-            "embedding": embedding,
-            "ideal_answer": ideal_text,
-            "keywords": q["keywords"],
-            "role": role
-        }
-print(f"System Optimized: {len(EMBEDDING_CACHE)} questions cached.")
+_is_initialized = False
+
+def initialize_ai():
+    global model, QUESTIONS_DB, EMBEDDING_CACHE, _is_initialized
+    if _is_initialized:
+        return
+        
+    print("Loading local AI model (this may take 10-20 seconds on first run)...")
+    model = SentenceTransformer('all-MiniLM-L6-v2')  # ~80MB, very fast
+    print("Local AI model loaded successfully!")
+
+    # Load the questions dataset
+    DATASET_PATH = os.path.join(os.path.dirname(__file__), 'data', 'questions.json')
+    with open(DATASET_PATH, 'r', encoding='utf-8') as f:
+        QUESTIONS_DB = json.load(f)
+
+    # PRE-CACHE EMBEDDINGS (Performance Optimization)
+    print("Optimizing system: Pre-calculating answer embeddings...")
+    for role, questions in QUESTIONS_DB.items():
+        for q in questions:
+            q_text = q["question"]
+            ideal_text = q["ideal_answer"]
+            embedding = model.encode([ideal_text])
+            EMBEDDING_CACHE[q_text.lower()] = {
+                "embedding": embedding,
+                "ideal_answer": ideal_text,
+                "keywords": q["keywords"],
+                "role": role
+            }
+    print(f"System Optimized: {len(EMBEDDING_CACHE)} questions cached.")
+
 
 
 def generate_interview_questions(field, count):
@@ -38,6 +46,7 @@ def generate_interview_questions(field, count):
     Randomly selects questions from the dataset for the given role.
     """
     try:
+        initialize_ai()
         # Normalize field name
         role = field.strip()
         
@@ -67,6 +76,7 @@ def analyze_interview_answer(question, answer):
     Context-aware feedback for General Interview vs Technical questions.
     """
     try:
+        initialize_ai()
         # Check cache for question data
         q_key = question.lower()
         if q_key not in EMBEDDING_CACHE:
